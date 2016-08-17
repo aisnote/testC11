@@ -14,6 +14,7 @@
 #include <mutex>
 #include <set>
 
+#include "StdBindTest.h"
 
 
 using namespace std;
@@ -407,8 +408,26 @@ namespace TEST_PTR
 
 namespace TEST_SET
 {
+	bool b1()
+	{
+		return true;
+	}
+
+	bool b2()
+	{
+		return false;
+	}
+
 	void TEST()
 	{
+
+		if (!b1() || !b2())
+		{
+			int i = 0;
+		}
+
+
+
 		std::set<int> s;
 
 		for (int i = 0; i < 200; i++)
@@ -470,6 +489,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	TEST_PTR::TEST();
 
 	TEST_SET::TEST();
+
+	StdBindTest::instance()->TEST();
 
 	return 0;
 }
