@@ -27,6 +27,9 @@
     <ClInclude Include="StdBindTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HighResolutionTimeCount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StdBindTest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HighResolutionTimeCount.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -15,7 +15,7 @@
 #include <set>
 
 #include "StdBindTest.h"
-
+#include "HighResolutionTimeCount.h"
 
 using namespace std;
 
@@ -442,6 +442,35 @@ namespace TEST_SET
 	}
 }
 
+namespace TEST_EMPLACE
+{
+	const int count = 20000;
+	void TEST()
+	{
+		
+		std::vector<std::string> vs;
+		{
+			HighResolutionTimeCount hrtc;
+			for (int i = 0; i < count; i++)
+			{
+				vs.push_back("test");
+			}
+
+			cout << "push_back cost: " << hrtc.cost() << endl;
+		}
+
+		{
+			HighResolutionTimeCount hrtc;
+			for (int i = 0; i < count; i++)
+			{
+				vs.emplace_back("test");
+			}
+
+			cout << "push_back cost: " << hrtc.cost() << endl;
+		}
+	}
+}
+
 
 
 
@@ -491,6 +520,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	TEST_SET::TEST();
 
 	StdBindTest::instance()->TEST();
+
+	TEST_EMPLACE::TEST();
 
 	return 0;
 }
