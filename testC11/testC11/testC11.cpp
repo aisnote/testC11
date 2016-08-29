@@ -442,11 +442,41 @@ namespace TEST_SET
 	}
 }
 
+struct DialInNumber
+{
+	DialInNumber() {};
+	DialInNumber(const std::string& number, bool tollFree) :number(number), tollFree(tollFree) { };
+	std::string number;
+	bool tollFree{ false };
+};
+
+using DialInNumbers = std::vector<DialInNumber>;
+
 namespace TEST_EMPLACE
 {
 	const int count = 20000;
 	void TEST()
 	{
+		DialInNumbers numbers;
+		{
+			HighResolutionTimeCount hrtc;
+			for (int i = 0; i < count; i++)
+			{
+				numbers.emplace_back("test",false);
+			}
+
+			cout << "emplace_back cost1: " << hrtc.cost() << endl;
+		}
+
+		{
+			HighResolutionTimeCount hrtc;
+			for (int i = 0; i < count; i++)
+			{
+				numbers.push_back({ "test",false });
+			}
+
+			cout << "push_back cost2: " << hrtc.cost() << endl;
+		}
 		
 		std::vector<std::string> vs;
 		{
@@ -466,10 +496,11 @@ namespace TEST_EMPLACE
 				vs.emplace_back("test");
 			}
 
-			cout << "push_back cost: " << hrtc.cost() << endl;
+			cout << "emplace_back cost: " << hrtc.cost() << endl;
 		}
 	}
 }
+
 
 
 
