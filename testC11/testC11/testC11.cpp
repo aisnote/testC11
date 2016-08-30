@@ -477,7 +477,7 @@ namespace TEST_EMPLACE
 
 			cout << "push_back cost2: " << hrtc.cost() << endl;
 		}
-		
+
 		std::vector<std::string> vs;
 		{
 			HighResolutionTimeCount hrtc;
@@ -502,11 +502,40 @@ namespace TEST_EMPLACE
 }
 
 
+#include <atomic>
+#include <memory>
+struct Message {
+	int n;
+};
+
+using MessagePtr = std::shared_ptr<Message>;
+using Messages = std::vector <MessagePtr>;
+
+#define SPARKPROPERTY(Type, SingleType, Name, GetterName) public:\
+	Type GetterName() const{\
+		std::lock_guard<std::mutex> lock(mDataAccessMutex);\
+		return Name; }\
+	protected:\
+		Type Name;
+
+struct ProtectClass
+{
+	SPARKPROPERTY(Messages, MessagePtr, messages, getMessages)
+
+private:
+	mutable std::mutex mDataAccessMutex;
+};
+
+using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 
 
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	auto atClass = std::make_shared<ProtectClass>();
+	atClass->getMessages().reserve(20) ;
+	//atClass->messages.reserve(20);
+
 	//auto type
 	auto x = 0;					// x is int
 	auto c = 'a';				// char
