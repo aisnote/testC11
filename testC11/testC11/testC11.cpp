@@ -1,8 +1,11 @@
 // testC11.cpp : Defines the entry point for the console application.
 //
 
+
 #include "stdafx.h"
-#include "stdio.h"
+
+
+//#include "stdio.h"
 #include <iostream>
 #include <map>
 #include <vector>
@@ -13,6 +16,8 @@
 #include <memory>
 #include <mutex>
 #include <set>
+#include <algorithm>
+#include <cmath>
 
 #include "StdBindTest.h"
 #include "HighResolutionTimeCount.h"
@@ -43,8 +48,8 @@ public:
 //c11 container
 void	test_Container_initializer()
 {
-	vector<string> vs = { "first", "second", "third" };
-	map<string, string> singers =
+    std::vector<std::string> vs = { "first", "second", "third" };
+    std::map<std::string, std::string> singers =
 	{ { "Lady Gaga", "+1 (212) 555-7890" },
 	{ "Beyonce Knowles", "+1 (212) 555-0987" } };
 }
@@ -145,7 +150,7 @@ public:
 	//!test delete function
 	void test_delete_function()
 	{
-		test_NoCopy_use_delete_function a;
+		//test_NoCopy_use_delete_function a;
 		//! test_NoCopy_use_delete_function b(a);  // cannot complie
 	}
 
@@ -167,24 +172,24 @@ public:
 		int UpperCase = 0;
 
 		// lambda expression
-		for_each(s, s + sizeof(s), [&UpperCase](char c){
+        std::for_each(s, s + sizeof(s), [&UpperCase](char c){
 			if (isupper(c))
 				UpperCase++;
 		});
 
-		cout << UpperCase << " uppercase letters in : " << s << endl;
+        //cout << UpperCase << " uppercase letters in : " << s << endl;
 	}
 
 
 protected:
 	void	func(int)
 	{
-		cout << "call int_func(int)" << endl;
+		//cout << "call int_func(int)" << endl;
 	}
 
 	void	func(char *)
 	{
-		cout << "call int_func(char *)" << endl;
+		//cout << "call int_func(char *)" << endl;
 	}
 private:
 
@@ -220,7 +225,7 @@ namespace TEST_CAST {
 	public:
 		virtual void foo()
 		{
-			cout << "call from A::foo()" << endl;
+            std::cout << "call from A::foo()" << std::endl;
 		};
 	};
 
@@ -229,7 +234,7 @@ namespace TEST_CAST {
 	public:
 		virtual void foo()
 		{
-			cout << "call from B::foo()" << endl;
+            std::cout << "call from B::foo()" << std::endl;
 		};
 	};
 
@@ -241,7 +246,7 @@ namespace TEST_CAST {
 		B* pB = new B();
 		pB->foo();
 
-		void* pV = dynamic_cast<void*>(pA);
+		//void* pV = dynamic_cast<void*>(pA);
 
 		A* pADynamic = dynamic_cast<A*>(pB);
 		if (pADynamic)
@@ -253,7 +258,7 @@ namespace TEST_CAST {
 	public:
 		void test()
 		{
-			cout << "ClassParent::test();" << endl;
+            std::cout << "ClassParent::test();" << std::endl;
 		}
 	};
 
@@ -262,7 +267,7 @@ namespace TEST_CAST {
 	public:
 		void test()
 		{
-			cout << "ClassParentChild::test();" << endl;
+			std::cout << "ClassParentChild::test();" << std::endl;
 		}
 	};
 
@@ -271,7 +276,7 @@ namespace TEST_CAST {
 	public:
 		void test()
 		{
-			cout << "ClassParentChildSon::test();" << endl;
+			std::cout << "ClassParentChildSon::test();" << std::endl;
 		}
 	};
 
@@ -301,9 +306,6 @@ namespace TEST_LAMBDA {
 	// 	});
 
 	//std::thread t([]{ std::cout << "Hello std::thread"; });
-
-#include <algorithm>
-#include <cmath>
 
 	void abssort(float *x, unsigned N)
 	{
@@ -529,8 +531,12 @@ private:
 using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 
 
-
-int _tmain(int argc, _TCHAR* argv[])
+#ifndef _WIN32
+            int main(int argc, const char * argv[])
+#else
+            int _tmain(int argc, _TCHAR* argv[])
+#endif
+            
 {
 	auto atClass = std::make_shared<ProtectClass>();
 	atClass->getMessages().reserve(20) ;
