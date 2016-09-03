@@ -426,6 +426,7 @@ namespace TEST_SET
 		if (!b1() || !b2())
 		{
 			int i = 0;
+            i++;
 		}
 
 
