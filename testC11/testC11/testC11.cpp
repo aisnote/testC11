@@ -21,6 +21,7 @@
 
 #include "StdBindTest.h"
 #include "HighResolutionTimeCount.h"
+#include "ParamTypeTemplate.h"
 
 using namespace std;
 
@@ -589,6 +590,8 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 	StdBindTest::instance()->TEST();
 
 	TEST_EMPLACE::TEST();
+    
+    ParamTypeTemplate::TEST();
 
 	return 0;
 }

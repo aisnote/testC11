@@ -36,6 +36,7 @@
 		775547941D76944E00108EF3 /* StdBindTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StdBindTest.h; path = ../../testC11/testC11/StdBindTest.h; sourceTree = "<group>"; };
 		775547951D76944E00108EF3 /* targetver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = targetver.h; path = ../../testC11/testC11/targetver.h; sourceTree = "<group>"; };
 		775547961D76944E00108EF3 /* testC11.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = testC11.cpp; path = ../../testC11/testC11/testC11.cpp; sourceTree = "<group>"; };
+		77BB23671D7E3F3000918B8E /* ParamTypeTemplate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ParamTypeTemplate.h; path = ../../testC11/testC11/ParamTypeTemplate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +78,7 @@
 				775547941D76944E00108EF3 /* StdBindTest.h */,
 				775547951D76944E00108EF3 /* targetver.h */,
 				775547961D76944E00108EF3 /* testC11.cpp */,
+				77BB23671D7E3F3000918B8E /* ParamTypeTemplate.h */,
 			);
 			path = "testC11-mac";
 			sourceTree = "<group>";
@@ -265,6 +267,7 @@
 				7755478C1D76938100108EF3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
