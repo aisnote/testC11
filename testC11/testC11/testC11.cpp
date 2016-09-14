@@ -18,6 +18,10 @@
 #include <set>
 #include <algorithm>
 #include <cmath>
+#include <ostream>
+#include <iomanip>
+#include <iosfwd>
+#include <sstream>
 
 #include "StdBindTest.h"
 #include "HighResolutionTimeCount.h"
@@ -592,6 +596,11 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 	TEST_EMPLACE::TEST();
     
     ParamTypeTemplate::TEST();
+
+	std::stringstream milliStream;
+	milliStream << std::setw(3) << std::setfill('0') << 122 << 0;
+
+	auto milliString = milliStream.str();
 
 	return 0;
 }
