@@ -602,6 +602,14 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 
 	auto milliString = milliStream.str();
 
+
+	//simple test
+	const char* test_char = "this is a test string";
+	char dest[128] = {0};
+	auto destSize = sizeof(dest);
+	auto strictSize = std::min<size_t>(strlen(test_char), sizeof(dest));
+	memcpy_s(dest, destSize, test_char, strictSize);
+
 	return 0;
 }
 
