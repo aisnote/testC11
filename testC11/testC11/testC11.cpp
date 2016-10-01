@@ -529,9 +529,12 @@ private:
 using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 
 
+#define PROTOCOL(scheme) L"URL: #scheme protocol"
+
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+	std::wcout << PROTOCOL(ciscospark);
 	auto atClass = std::make_shared<ProtectClass>();
 	atClass->getMessages().reserve(20) ;
 	//atClass->messages.reserve(20);
@@ -582,6 +585,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	StdBindTest::instance()->TEST();
 
 	TEST_EMPLACE::TEST();
+
+	for (auto index = 0; index < 10; index++)
+	{
+		wcout << index;
+	}
 
 	return 0;
 }
