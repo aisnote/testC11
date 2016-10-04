@@ -27,6 +27,8 @@
 #include "HighResolutionTimeCount.h"
 #include "ParamTypeTemplate.h"
 
+#include "TestStdMove.h"
+
 using namespace std;
 
 //class
@@ -536,6 +538,8 @@ private:
 
 using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 
+#define RUN_ALL_TESTS()	DoAllTest()
+
 
 #define PROTOCOL(scheme) L"URL: #scheme protocol"
 
@@ -616,6 +620,9 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 	auto destSize = sizeof(dest);
 	auto strictSize = std::min<size_t>(strlen(test_char), sizeof(dest));
 	memcpy_s(dest, destSize, test_char, strictSize);
+
+	//run all tests
+	RUN_ALL_TESTS();
 
 	return 0;
 }
