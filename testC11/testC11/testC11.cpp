@@ -28,6 +28,7 @@
 #include "ParamTypeTemplate.h"
 
 #include "TestStdMove.h"
+#include "TestSharePtr.h"
 
 using namespace std;
 
@@ -550,6 +551,8 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 #endif
             
 {
+    MySharedPtrTest();
+
 	std::wcout << PROTOCOL(ciscospark);
 	auto atClass = std::make_shared<ProtectClass>();
 	atClass->getMessages().reserve(20) ;

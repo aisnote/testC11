@@ -6,7 +6,9 @@ class TestStdMove:public TestT<ITest>
 public:
 	TestStdMove();
 	virtual ~TestStdMove();
+
+	virtual bool doTest() override;
 };
 
-TEST_CLASS(TestStdMove);
+
 
