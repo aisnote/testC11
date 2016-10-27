@@ -1,4 +1,4 @@
-// testC11.cpp : Defines the entry point for the console application.
+﻿// testC11.cpp : Defines the entry point for the console application.
 //
 
 
@@ -22,6 +22,7 @@
 #include <iomanip>
 #include <iosfwd>
 #include <sstream>
+#include <regex>
 
 #include "StdBindTest.h"
 #include "HighResolutionTimeCount.h"
@@ -29,6 +30,7 @@
 
 #include "TestStdMove.h"
 #include "TestSharePtr.h"
+#include "TestRegex.h"
 
 using namespace std;
 
@@ -551,6 +553,55 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 #endif
             
 {
+                
+    int size = 100;
+    std::unique_ptr<char[]> statusPtr = std::make_unique<char[]>(size);
+
+    
+    {
+        std::string s("this subject has a subjmarine as a subjsequence subjmite");
+        std::smatch m;
+        std::regex e("\\b(subj)([^ ]*)");    
+
+        std::cout << "target: " << s << std::endl;
+        std::cout << "regex: /\\b(sub)([^ ]*)/" << std::endl;
+        std::cout << "The following matches and submatches were found:" << std::endl;
+
+        while (std::regex_search(s, m, e)) {
+            std::cout << m.str() << std::endl; 
+            s = m.suffix().str(); 
+        }
+        //return 0;
+    }
+
+
+
+    std::wstring s = L"Access-Control-Allow-Origin:*\
+        Cache - Control:no - cache, no - store, max - age = 0, no - transform, private\
+        Connection : Keep - Alive\
+        Content-Length: 43\n\
+        Content - Type : image / gif\
+        Date : Wed, 26 Oct 2016 22 : 18 : 17 GMT\
+        ETag : \"58112BA9-4BF8-4E978394\"\
+        Expires : Tue, 25 Oct 2016 22 : 18 : 17 GMT\
+        Keep - Alive : timeout = 15\
+        Last - Modified : Thu, 27 Oct 2016 22 : 18 : 17 GMT\
+        P3P : policyref = \"/w3c/p3p.xml\", CP = \"NOI DSP COR NID PSA OUR IND COM NAV STA\"\
+        Pragma : no - cache\
+        Server : Omniture DC / 2.0.0\
+        Vary : *\
+        X - C : ms - 5.0.0\
+        xserver : www2534";
+
+    auto length = getContentLength(s);
+
+    std::wstring reg = L"Content-Length: {[0-9]+}";
+//     std::wcmatch m;
+
+    std::vector<std::wstring> result;
+
+    searchByRegex(s, reg, result);
+
     MySharedPtrTest();
 
 	std::wcout << PROTOCOL(ciscospark);
