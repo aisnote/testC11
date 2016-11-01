@@ -1,5 +1,6 @@
 #pragma once
 #include <chrono>
+#include <iostream>
 
 class HighResolutionTimeCount
 {
@@ -11,6 +12,7 @@ public:
 	~HighResolutionTimeCount()
 	{
 		//end = std::chrono::high_resolution_clock::now();
+        std::cout << "Cost = " << cost();
 	}
 
 	double cost()

@@ -31,6 +31,7 @@
 #include "TestStdMove.h"
 #include "TestSharePtr.h"
 #include "TestRegex.h"
+#include "TestPushback.h"
 
 using namespace std;
 
@@ -553,6 +554,7 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 #endif
             
 {
+    PUSH_TEST();
                 
     int size = 100;
     std::unique_ptr<char[]> statusPtr = std::make_unique<char[]>(size);
