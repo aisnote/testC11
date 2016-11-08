@@ -43,6 +43,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestThread.h">
+    <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestVectorByte.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TestPushback.h">

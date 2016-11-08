@@ -32,6 +32,7 @@
 #include "TestSharePtr.h"
 #include "TestRegex.h"
 #include "TestPushback.h"
+#include "TestVectorByte.h"
 
 using namespace std;
 
@@ -556,6 +557,8 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 {
     PUSH_TEST();
                 
+    ByteBufferVector_Test();
+
     int size = 100;
     std::unique_ptr<char[]> statusPtr = std::make_unique<char[]>(size);
 

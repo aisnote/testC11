@@ -152,6 +152,7 @@
     <ClInclude Include="TestStdMove.h" />
     <ClInclude Include="TestT.h" />
     <ClInclude Include="TestThread.h" />
+    <ClInclude Include="TestVectorByte.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HighResolutionTimeCount.cpp" />
