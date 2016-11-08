@@ -1,10 +1,6 @@
 ﻿// testC11.cpp : Defines the entry point for the console application.
 //
-
-
 #include "stdafx.h"
-
-
 //#include "stdio.h"
 #include <iostream>
 #include <map>
@@ -35,6 +31,9 @@
 #include "TestVectorByte.h"
 
 using namespace std;
+
+#define CATCH_CONFIG_RUNNER
+#include "catch.hpp"
 
 //class
 class iAmClass
@@ -549,32 +548,32 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 #define PROTOCOL(scheme) L"URL: #scheme protocol"
 
 #ifndef _WIN32
-            int main(int argc, const char * argv[])
+            int oldMain(int argc, const char * argv[])
 #else
-            int _tmain(int argc, _TCHAR* argv[])
+            int oldMain(int argc, const char* argv[])
 #endif
-            
+
 {
     PUSH_TEST();
-                
+
     ByteBufferVector_Test();
 
     int size = 100;
     std::unique_ptr<char[]> statusPtr = std::make_unique<char[]>(size);
 
-    
+
     {
         std::string s("this subject has a subjmarine as a subjsequence subjmite");
         std::smatch m;
-        std::regex e("\\b(subj)([^ ]*)");    
+        std::regex e("\\b(subj)([^ ]*)");
 
         std::cout << "target: " << s << std::endl;
         std::cout << "regex: /\\b(sub)([^ ]*)/" << std::endl;
         std::cout << "The following matches and submatches were found:" << std::endl;
 
         while (std::regex_search(s, m, e)) {
-            std::cout << m.str() << std::endl; 
-            s = m.suffix().str(); 
+            std::cout << m.str() << std::endl;
+            s = m.suffix().str();
         }
         //return 0;
     }
@@ -605,7 +604,7 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 
     std::vector<std::wstring> result;
 
-    searchByRegex(s, reg, result);
+    //searchByRegex(s, reg, result);
 
     MySharedPtrTest();
 
@@ -660,7 +659,7 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 	StdBindTest::instance()->TEST();
 
 	TEST_EMPLACE::TEST();
-    
+
 	for (auto index = 0; index < 10; index++)
 	{
 		wcout << index;
@@ -686,3 +685,31 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 	return 0;
 }
 
+int main(int argc, const char* argv[])
+{
+    // global setup...
+
+    oldMain(argc, argv);
+
+    Catch::Session session; // There must be exactly once instance
+                            // writing to session.configData() here sets defaults
+                            // this is the preferred way to set them
+
+    int returnCode = session.applyCommandLine(argc, argv);
+    if (returnCode != 0) // Indicates a command line error
+        return returnCode;
+
+    // writing to session.configData() or session.Config() here
+    // overrides command line args
+    // only do this if you know you need to
+
+    return session.run();
+}
+
+TEST_CASE("vectors can be sized and resized-only for section", "[vector-section]") 
+{
+    std::vector<int> v(5);
+
+    REQUIRE(v.size() == 5);
+    REQUIRE(v.capacity() >= 5);
+}

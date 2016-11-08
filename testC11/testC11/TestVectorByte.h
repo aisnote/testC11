@@ -36,7 +36,7 @@ inline void ByteBufferVector_Test()
 
     for (int i = 0; i < 5000; i++)
     {
-        myByte* ptest = new myByte[65536*(i+1)];
+        //myByte* ptest = new myByte[65536*(i+1)];
         //delete[]ptest;
     }
 
