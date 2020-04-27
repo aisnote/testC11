@@ -525,7 +525,7 @@ struct Message {
 using MessagePtr = std::shared_ptr<Message>;
 using Messages = std::vector <MessagePtr>;
 
-#define SPARKPROPERTY(Type, SingleType, Name, GetterName) public:\
+#define LLYPROPERTY(Type, SingleType, Name, GetterName) public:\
 	Type GetterName() const{\
 		std::lock_guard<std::mutex> lock(mDataAccessMutex);\
 		return Name; }\
@@ -534,7 +534,7 @@ using Messages = std::vector <MessagePtr>;
 
 struct ProtectClass
 {
-	SPARKPROPERTY(Messages, MessagePtr, messages, getMessages)
+	LLYPROPERTY(Messages, MessagePtr, messages, getMessages)
 
 private:
 	mutable std::mutex mDataAccessMutex;
@@ -712,4 +712,32 @@ TEST_CASE("vectors can be sized and resized-only for section", "[vector-section]
 
     REQUIRE(v.size() == 5);
     REQUIRE(v.capacity() >= 5);
+}
+
+
+struct FrameBase
+{
+public:
+	int m_testInt;
+};
+
+using FrameWriter = std::function<void(FrameBase &)>;
+
+FrameBase g_data = {0};
+
+void test_framebase(FrameWriter&& writer)
+{
+	writer(g_data);
+}
+
+
+TEST_CASE("std::function", "[std::function]")
+{
+	
+	FrameBase base = { 56 };
+	test_framebase([base](FrameBase& fBase) {
+		fBase.m_testInt = base.m_testInt;
+	});
+
+	REQUIRE(g_data.m_testInt == base.m_testInt);
 }
