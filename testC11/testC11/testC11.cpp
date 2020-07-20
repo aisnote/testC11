@@ -547,6 +547,12 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 
 #define PROTOCOL(scheme) L"URL: #scheme protocol"
 
+void FloatShort_Test()
+{
+	
+}
+
+
 #ifndef _WIN32
             int oldMain(int argc, const char * argv[])
 #else
@@ -628,6 +634,7 @@ using ProtectClassPtr = std::shared_ptr<ProtectClass>;
 	cout << " sizeof(LongLong)=" << sizeof(national_debt) << endl;
 	cout << " sizeof(float)=" << sizeof(f) << endl;
 	cout << " sizeof(pointer)=" << sizeof(iAmPointer) << endl;
+	cout << " sizeof(short)=" << sizeof(short) << endl;
 
 	//init class
 	iAmClass aClass{ 0, 0 };  //c11 only, equivalent to below line

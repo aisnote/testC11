@@ -167,6 +167,10 @@
     <ClCompile Include="testC11.cpp" />
     <ClCompile Include="TestStdMove.cpp" />
     <ClCompile Include="TestThread.cpp" />
+    <ClCompile Include="vectorizationTest.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
